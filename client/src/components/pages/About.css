@@ -1,0 +1,13 @@
+.word-container {
+    background-color: var(--primary);
+    padding: 25px;
+    margin: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.textblock-link {
+  color: var(--tertiary);
+  cursor: pointer;
+}

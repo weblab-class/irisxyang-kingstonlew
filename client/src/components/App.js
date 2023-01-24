@@ -9,6 +9,7 @@ import NavBar from "./modules/NavBar.js";
 import About from "./pages/About.js";
 import Profile from "./pages/Profile.js";
 import Archive from "./pages/Archive.js";
+import Draw from "./pages/Draw.js";
 
 import "../utilities.css";
 import "./App.css";
@@ -52,8 +53,9 @@ const App = () => {
         <Router>
           <Home path="/" user={user} />
           <About path="/about" />
+          <Draw path="/draw" />
           <Archive path="/archive" />
-          <Profile path="/profile/:id" />
+          <Profile path="/profile/:id" user={user} />
           <NotFound default />
         </Router>
       </div>

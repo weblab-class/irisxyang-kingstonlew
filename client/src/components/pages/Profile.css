@@ -1,0 +1,13 @@
+.userinfo-container{
+    padding: 25px;
+    margin: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.userimage-container{
+    padding: 10px;
+    margin: 0;
+}
+
