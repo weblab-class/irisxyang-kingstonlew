@@ -16,16 +16,22 @@ function verify(token) {
     .then((ticket) => ticket.getPayload());
 }
 
+function generateRandomUsername() {
+  const randomNumber = Math.random() * 1000000000;
+  return `toeluvr${randomNumber}`;
+}
+
 // gets user from DB, or makes a new account if it doesn't exist yet
 function getOrCreateUser(user) {
   // the "sub" field means "subject", which is a unique identifier for each user
   return User.findOne({ googleid: user.sub }).then((existingUser) => {
     if (existingUser) return existingUser;
-
     const newUser = new User({
       name: user.name,
       googleid: user.sub,
       picture: user.picture,
+      bio: "Fill me in!",
+      username: generateRandomUsername(),
     });
 
     return newUser.save();

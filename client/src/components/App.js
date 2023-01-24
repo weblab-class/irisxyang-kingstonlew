@@ -3,9 +3,14 @@ import { Router } from "@reach/router";
 import jwt_decode from "jwt-decode";
 
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+import Home from "./pages/Home.js";
+import NavBar from "./modules/NavBar.js";
+import About from "./pages/About.js";
+import Profile from "./pages/Profile.js";
+import Archive from "./pages/Archive.js";
 
 import "../utilities.css";
+import "./App.css";
 
 import { get, post } from "../utilities";
 
@@ -40,10 +45,16 @@ const App = () => {
 
   return (
     <>
-      <Router>
-        <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <NotFound default />
-      </Router>
+      <NavBar></NavBar>
+      <div className="App-container">
+        <Router>
+          <Home path="/" userId={userId} />
+          <About path="/about" />
+          <Archive path="/archive" />
+          <Profile path="/profile" />
+          <NotFound default />
+        </Router>
+      </div>
     </>
   );
 };

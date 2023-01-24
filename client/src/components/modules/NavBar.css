@@ -1,0 +1,29 @@
+.NavBar-container {
+    padding: var(--s) var(--l);
+    background-color: #FFC1E3;
+}
+  
+.NavBar-title {
+    color: black;
+    font-size: 35px;
+}
+  
+.NavBar-linkContainer {
+    margin-left: var(--xl);
+}
+  
+.NavBar-link,
+.NavBar-link:visited {
+    color: black;
+    font-size: 25px;
+    text-decoration: none;
+}
+  
+.NavBar-link:hover {
+    opacity: 0.70;
+}
+  
+.NavBar-link + .NavBar-link {
+    margin-left: var(--xl);
+}
+  
