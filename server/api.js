@@ -8,12 +8,14 @@
 */
 
 const express = require("express");
-
+const moment = require("moment");
 // import models so we can interact with the database
 const User = require("./models/user");
+const Post = require("./models/post");
 
 // import authentication library
 const auth = require("./auth");
+const { getWord, today } = require("./util");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -32,6 +34,52 @@ router.get("/whoami", (req, res) => {
 // |------------------------------|
 // | write your API methods below!|
 // |------------------------------|
+
+router.get("/todaysWord", (req, res) => {
+  const date = new Date();
+  const word = getWord(date);
+  res.send({ word });
+});
+
+router.get("/todaysDrawings", async (req, res) => {
+  const date = today();
+  const drawings = await Picture.find({ date }).populate("user");
+  res.send({ drawings });
+});
+
+router.get("/pastDrawings", async (req, res) => {
+  const { date } = req.query;
+  const drawings = await Picture.find({ date }).populate("user");
+  res.send(drawings);
+});
+
+router.get("/user", async (req, res) => {
+  const { username } = req.query;
+  const user = await User.findOne({ username });
+  res.send({ user });
+});
+
+router.post("/post", auth.ensureLoggedIn, async (req, res) => {
+  const { picture } = req.body;
+  const date = today();
+  const word = getWord(date);
+  const post = new Post({ date, word, picture, user: req.user._id });
+  await post.save();
+  res.send({ post });
+});
+
+router.post("/editUser", auth.ensureLoggedIn, async (req, res) => {
+  const { username, bio } = req.body;
+  const otherUser = await User.findOne({ username });
+  const doesExist = otherUser !== null && otherUser.googleid !== req.session.user.googleid;
+  if (doesExist) return res.status(401).send({ error: "username is taken wahhhhhhhhh :'(" });
+  const user = await User.findByIdAndUpdate(req.session.user._id);
+  user.username = username;
+  user.bio = bio;
+  await user.save();
+  // TODO : update req.session.user
+  res.send({ user });
+});
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

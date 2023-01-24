@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
 const schema = new mongoose.Schema({
-  userId: String,
-  pictureId: String,
+  user: Schema.Types.ObjectId,
+  picture: Array,
   date: String,
   word: String,
 });

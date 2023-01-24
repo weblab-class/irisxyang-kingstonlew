@@ -25,7 +25,7 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
       </div>
       <div className="flex flex-row">
         {user && (
-          <Link to={`/profile/${user._id}`} className="NavBar-link">
+          <Link to={`/profile/${user.username}`} className="NavBar-link">
             {user.username}
           </Link>
         )}
