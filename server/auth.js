@@ -3,7 +3,7 @@ const User = require("./models/user");
 
 // create a new OAuth client used to verify google sign-in
 //    TODO: replace with your own CLIENT_ID
-const CLIENT_ID = "FILL IN CLIENT ID";
+const CLIENT_ID = "490033376077-ebsdbk0at6c1dufojethhefbg41kcqeo.apps.googleusercontent.com";
 const client = new OAuth2Client(CLIENT_ID);
 
 // accepts a login token from the frontend, and verifies that it's legit
@@ -17,7 +17,7 @@ function verify(token) {
 }
 
 function generateRandomUsername() {
-  const randomNumber = Math.random() * 1000000000;
+  const randomNumber = Math.floor(Math.random() * 1000000000);
   return `toeluvr${randomNumber}`;
 }
 
