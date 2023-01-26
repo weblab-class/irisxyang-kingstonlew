@@ -2,9 +2,19 @@ import React from "react";
 import "./Home.css";
 import { Link } from "@reach/router";
 import Post from "../modules/Post";
+import { get } from "../../utilities";
 
 const Home = ({ user }) => {
-  const [word, setWord] = React.useState("foot");
+  const [word, setWord] = React.useState();
+  const [posts, setPosts] = React.useState([]);
+
+  React.useEffect(() => {
+    get("/api/todaysDrawings").then((res) => {
+      console.log(res);
+      setPosts(res);
+    });
+    get("/api/todaysWord").then((res) => setWord(res.word));
+  }, []);
 
   return (
     <div className="flex flex-column">
@@ -17,7 +27,9 @@ const Home = ({ user }) => {
         </Link>
       </div>
       <div>
-        <Post post={{ picture: [], user: {}, word: "1/23", word: "foot" }} isToday={true} />
+        {posts.map((post) => (
+          <Post post={post} isToday />
+        ))}
       </div>
     </div>
   );

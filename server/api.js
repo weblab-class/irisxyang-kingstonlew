@@ -43,8 +43,8 @@ router.get("/todaysWord", (req, res) => {
 
 router.get("/todaysDrawings", async (req, res) => {
   const date = today();
-  const drawings = await Picture.find({ date }).populate("user");
-  res.send({ drawings });
+  const drawings = await Post.find({ date }).populate("user");
+  res.send(drawings);
 });
 
 router.get("/pastDrawings", async (req, res) => {
@@ -63,7 +63,7 @@ router.post("/post", auth.ensureLoggedIn, async (req, res) => {
   const { picture } = req.body;
   const date = today();
   const word = getWord(date);
-  const post = new Post({ date, word, picture, user: req.user._id });
+  const post = new Post({ date, word, picture, user: req.session.user._id });
   await post.save();
   res.send({ post });
 });

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const schema = new mongoose.Schema({
-  user: Schema.Types.ObjectId,
+  user: [{ type: Schema.Types.ObjectId, ref: "user" }],
   picture: Array,
   date: String,
   word: String,

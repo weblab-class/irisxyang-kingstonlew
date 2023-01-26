@@ -1,7 +1,13 @@
 import React from "react";
+import Editor from "./PixelEditor/Editor";
 
 const Draw = () => {
-  return <h1 className="tc f1 fw1">Draw</h1>;
+  return (
+    <div className="flex flex-column">
+      <h1 className="tc">Draw</h1>
+      <Editor />
+    </div>
+  );
 };
 
 export default Draw;

@@ -1,7 +1,11 @@
 import React from "react";
 
 const Archive = () => {
-  return <h1 className="tc f1 fw1">Archive</h1>;
+  return (
+    <div>
+      <h1 className="tc ma4 page-title">ARCHIVE</h1>
+    </div>
+  );
 };
 
 export default Archive;
