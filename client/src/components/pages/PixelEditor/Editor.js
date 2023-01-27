@@ -32,6 +32,8 @@ const Editor = ({
   width = DEFAULT_WIDTH,
   height = DEFAULT_HEIGHT,
   pixelSize = DEFAULT_PIXEL_SIZE,
+  initialGrid = null,
+  postId = null,
 }) => {
   const [grid, setGrid] = useState([]);
   const [color, setColor] = useState(DEFAULT_COLOR);
@@ -39,14 +41,17 @@ const Editor = ({
   const [mode, setMode] = useState("pen");
 
   useEffect(() => {
+    if (initialGrid) {
+      return setGrid(initialGrid);
+    }
     setGrid(clearGrid(width, height));
-  }, [width, height, pixelSize]);
+  }, [width, height, pixelSize, initialGrid]);
 
   const submitDrawing = () => {
     if (!window.confirm("Are you sure you want to finish your drawing for today?")) return;
-    const picture = grid.map((row) => row.map(({ color }) => (color === "empty" ? "#fff" : color)));
-    post("/api/post", { picture }).then((post) => {
-      console.log({ post });
+    const picture = grid.map((row) => row.map(({ color }) => color));
+    const body = postId ? { picture, id: postId } : { picture };
+    post("/api/post", body).then((post) => {
       navigate("/");
     });
   };

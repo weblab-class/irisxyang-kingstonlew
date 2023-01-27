@@ -10,7 +10,6 @@ const Home = ({ user }) => {
 
   React.useEffect(() => {
     get("/api/todaysDrawings").then((res) => {
-      console.log(res);
       setPosts(res);
     });
     get("/api/todaysWord").then((res) => setWord(res.word));
@@ -18,7 +17,7 @@ const Home = ({ user }) => {
 
   return (
     <div className="flex flex-column">
-      <h1 className="tc ma4 page-title">* WELCOME TO [REDACTED] *</h1>
+      <h1 className="tc ma4 page-title">* WELCOME TO PIXELTHIS *</h1>
       <div className="word-container">
         <h1 className="tc ma0 fw1 f1">WORD OF THE DAY:</h1>
         <h2 className="tc ma0 mb3 fw1 f1">{word}</h2>
@@ -28,7 +27,7 @@ const Home = ({ user }) => {
       </div>
       <div>
         {posts.map((post) => (
-          <Post post={post} isToday />
+          <Post post={post} />
         ))}
       </div>
     </div>

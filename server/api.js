@@ -49,8 +49,9 @@ router.get("/todaysDrawings", async (req, res) => {
 
 router.get("/pastDrawings", async (req, res) => {
   const { date } = req.query;
-  const drawings = await Picture.find({ date }).populate("user");
-  res.send(drawings);
+  const word = getWord(date);
+  const drawings = await Post.find({ date }).populate("user");
+  res.send({ word, drawings });
 });
 
 router.get("/user", async (req, res) => {
@@ -60,11 +61,24 @@ router.get("/user", async (req, res) => {
 });
 
 router.post("/post", auth.ensureLoggedIn, async (req, res) => {
-  const { picture } = req.body;
+  const { picture, id } = req.body;
   const date = today();
   const word = getWord(date);
+  if (id) {
+    const post = await Post.findByIdAndUpdate(id, { picture });
+    return res.send({ msg: "ok" });
+  }
   const post = new Post({ date, word, picture, user: req.session.user._id });
   await post.save();
+  res.send({ post });
+});
+
+/**
+ * For fetching a post for today's canvas
+ */
+router.get("/getPost", auth.ensureLoggedIn, async (req, res) => {
+  const date = today();
+  const post = await Post.findOne({ date, user: req.session.user._id });
   res.send({ post });
 });
 

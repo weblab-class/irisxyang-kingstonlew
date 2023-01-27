@@ -7,7 +7,7 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">
-        <div className="NavBar-title u-inlineBlock">REDACTED</div>
+        <div className="NavBar-title u-inlineBlock">PIXELTHIS</div>
         <div className="NavBar-linkContainer u-inlineBlock">
           <Link to="/" className="NavBar-link">
             home

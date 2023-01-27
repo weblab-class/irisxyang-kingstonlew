@@ -15,6 +15,7 @@ import "../utilities.css";
 import "./App.css";
 
 import { get, post } from "../utilities";
+import DayArchive from "./pages/DayArchive";
 
 /**
  * Define the "App" component
@@ -36,7 +37,6 @@ const App = () => {
     const decodedCredential = jwt_decode(userToken);
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
-      console.log({ user });
       setUser(user);
     });
   };
@@ -56,6 +56,7 @@ const App = () => {
           <Draw path="/draw" />
           <Archive path="/archive" />
           <Profile path="/profile/:username" user={user} setUser={setUser} />
+          <DayArchive path="/day/:date" />
           <NotFound default />
         </Router>
       </div>
