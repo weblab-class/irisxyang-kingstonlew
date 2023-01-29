@@ -6,7 +6,7 @@ const COLOR_MAP = { empty: "#fff" };
 
 const Drawing = ({ picture }) => {
   return (
-    <div className="flex flex-column border">
+    <div className="flex flex-column">
       {picture.map((row) => (
         <div className="flex flex-row">
           {row.map((backgroundColor) => (

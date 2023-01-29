@@ -95,3 +95,11 @@ form {
 .tertiary {
   color: var(--tertiary);
 }
+
+a {
+  text-decoration: none;
+}
+
+.border {
+  border: 1px solid red;
+}

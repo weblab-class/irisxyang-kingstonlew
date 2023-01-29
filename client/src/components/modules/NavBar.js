@@ -2,12 +2,16 @@ import React from "react";
 import { Link } from "@reach/router";
 import "./NavBar.css";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import logo from "../../public/logo.png";
 
 const NavBar = ({ user, handleLogin, handleLogout }) => {
   return (
     <nav className="NavBar-container flex flex-row justify-between items-center">
       <div className="flex flex-row items-center">
-        <div className="NavBar-title u-inlineBlock">PIXELTHIS</div>
+        <Link className="flex flex-row items-center black" to="/">
+          <img src={logo} width="36px" height="36px" alt="" />
+          <span className="NavBar-title ml1">PIXELTHIS</span>
+        </Link>
         <div className="NavBar-linkContainer u-inlineBlock">
           <Link to="/" className="NavBar-link">
             home

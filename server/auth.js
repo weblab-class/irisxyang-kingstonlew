@@ -18,7 +18,7 @@ function verify(token) {
 
 function generateRandomUsername() {
   const randomNumber = Math.floor(Math.random() * 1000000000);
-  return `toeluvr${randomNumber}`;
+  return `user${randomNumber}`;
 }
 
 // gets user from DB, or makes a new account if it doesn't exist yet

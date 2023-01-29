@@ -11,6 +11,7 @@ import { DEFAULT_COLOR, COLOR_OPTIONS } from "./Colors";
 import { EMPTY_PIXEL } from "./Pixel";
 import { MenuItem, Select } from "@material-ui/core";
 import { navigate } from "@reach/router";
+import "./Editor.css";
 
 const DEFAULT_WIDTH = 16;
 const DEFAULT_HEIGHT = 16;
@@ -57,9 +58,9 @@ const Editor = ({
   };
 
   return (
-    <div className="flex flex-column pa3 ba b--moon-gray br2 items-center">
-      <div className="flex flex-row justify-between mb3">
-        <div className="flex flex-column mr3 items-center">
+    <div className="flex flex-column ma3 items-center editor-border">
+      <div className="flex flex-row justify-between w-100">
+        <div className="flex flex-column items-center">
           <div key="toolbar" className="flex flex-row items-center mb3">
             <Select value={mode} onChange={(e) => setMode(e.target.value)}>
               <MenuItem value="pen">Pen</MenuItem>
@@ -73,6 +74,9 @@ const Editor = ({
             </Tooltip>
           </div>
           <ColorPicker color={color} setColor={(c) => setColor(c)} colors={colors} />
+          <Button variant="contained" onClick={submitDrawing} className="mt3">
+            Save Drawing
+          </Button>
         </div>
         <Canvas
           addColor={(c) => {
@@ -84,11 +88,6 @@ const Editor = ({
           color={color}
           mode={mode}
         />
-      </div>
-      <div>
-        <Button variant="contained" onClick={submitDrawing}>
-          Save Drawing
-        </Button>
       </div>
     </div>
   );

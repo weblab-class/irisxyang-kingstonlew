@@ -15,7 +15,7 @@ const Post = require("./models/post");
 
 // import authentication library
 const auth = require("./auth");
-const { getWord, today } = require("./util");
+const { getWord, today, formatPost } = require("./util");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -44,14 +44,16 @@ router.get("/todaysWord", (req, res) => {
 router.get("/todaysDrawings", async (req, res) => {
   const date = today();
   const drawings = await Post.find({ date }).populate("user");
-  res.send(drawings);
+  const posts = await Promise.all(drawings.map(formatPost));
+  res.send(posts);
 });
 
 router.get("/pastDrawings", async (req, res) => {
   const { date } = req.query;
   const word = getWord(date);
   const drawings = await Post.find({ date }).populate("user");
-  res.send({ word, drawings });
+  const posts = await Promise.all(drawings.map(formatPost));
+  res.send({ word, drawings: posts });
 });
 
 router.get("/user", async (req, res) => {

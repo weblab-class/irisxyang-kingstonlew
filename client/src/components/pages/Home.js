@@ -10,6 +10,7 @@ const Home = ({ user }) => {
 
   React.useEffect(() => {
     get("/api/todaysDrawings").then((res) => {
+      console.log(res);
       setPosts(res);
     });
     get("/api/todaysWord").then((res) => setWord(res.word));
@@ -20,12 +21,16 @@ const Home = ({ user }) => {
       <h1 className="tc ma4 page-title">* WELCOME TO PIXELTHIS *</h1>
       <div className="word-container">
         <h1 className="tc ma0 fw1 f1">WORD OF THE DAY:</h1>
-        <h2 className="tc ma0 mb3 fw1 f1">{word}</h2>
+        <h2 className="tc ma0 mb3 fw1 f1 i">{word}</h2>
         <Link to="/draw" className="link tertiary mv3 f3">
           create your own pix {"-->"}
         </Link>
+        <Link to="/about" className="link tertiary mv3 f3">
+          learn about PIXELTHIS {"-->"}
+        </Link>
       </div>
-      <div>
+      <h1 className="fw1 f1">TODAY's PIX</h1>
+      <div className="flex flex-row flex-wrap">
         {posts.map((post) => (
           <Post post={post} />
         ))}
