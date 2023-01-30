@@ -89,7 +89,7 @@ const Editor = ({
               fontFamily: '"VT323", "Roboto", sans-serif',
             }}
           >
-            Save Drawing
+            POST!
           </Button>
         </div>
         <Canvas

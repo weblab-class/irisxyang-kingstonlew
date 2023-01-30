@@ -52,14 +52,14 @@ const Profile = ({ username }) => {
         />
         <div className="flex flex-column ml4">
           <h1 className="f1 fw1 mv0">@{profileUser.username}</h1>
-          <div className="flex flex-row justify-between mv3 mt1">
+          <div className="flex flex-row justify-between mv2">
             <div className="bg-stat fw1 f2 ph2 mr2">{posts.length} pix</div>
             <div className="bg-stat flex flex-row items-center ph2 ml2">
               <span className="fw1 f2">{likes}</span>
               <img src={heartBW} alt="" />
             </div>
           </div>
-          <h2 className="f2 fw1 mv0 mt3">{profileUser.bio}</h2>
+          <h2 className="f2 fw1 mv0 mt2">{profileUser.bio}</h2>
         </div>
       </div>
       <div className="flex flex-row flex-wrap justify-center w-100">

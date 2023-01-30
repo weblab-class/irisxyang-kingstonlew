@@ -25,7 +25,7 @@ const Home = ({ user }) => {
         <Link to="/draw" className="link tertiary mv3 f3">
           create your own pix {"-->"}
         </Link>
-        <Link to="/about" className="link tertiary mv3 f3">
+        <Link to="/about" className="link tertiary mb4 mt1 f3">
           learn about PIXELTHIS {"-->"}
         </Link>
       </div>

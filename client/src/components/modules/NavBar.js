@@ -10,7 +10,7 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
       <div className="flex flex-row items-center">
         <Link className="flex flex-row items-center black" to="/">
           <img src={logo} width="36px" height="36px" alt="" />
-          <span className="NavBar-title ml1">PIXELTHIS</span>
+          <span className="NavBar-title ml2">PIXELTHIS</span>
         </Link>
         <div className="NavBar-linkContainer u-inlineBlock">
           <Link to="/" className="NavBar-link">
@@ -46,7 +46,7 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
               handleLogout();
             }}
           >
-            Logout
+            logout
           </div>
         ) : (
           <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
