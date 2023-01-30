@@ -4,9 +4,9 @@ import "./About.css";
 
 const About = () => {
   return (
-    <div>
+    <div className="flex flex-column items-center">
       <h1 className="tc ma4 page-title">WHAT IS PIXELTHIS?</h1>
-      <div className="word-container">
+      <div className="word-container w-70">
         <h2 className="tc fw1 mh4">
           welcome to PixelThis, a platform for sharing your unique pixel artworks with friends! each
           day, you’ll be given a different art prompt, and you’ll be able to create your artwork{" "}

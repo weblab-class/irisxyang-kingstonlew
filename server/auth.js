@@ -30,7 +30,7 @@ function getOrCreateUser(user) {
       name: user.name,
       googleid: user.sub,
       picture: user.picture,
-      bio: "Fill me in!",
+      bio: "head to settings in the upper right to edit your username and bio!",
       username: generateRandomUsername(),
     });
 

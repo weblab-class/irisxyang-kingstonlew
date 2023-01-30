@@ -33,6 +33,11 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
             {user.username}
           </Link>
         )}
+        {user && (
+          <Link to={`/settings`} className="NavBar-link">
+            settings
+          </Link>
+        )}
         {user ? (
           <div
             className="NavBar-link"

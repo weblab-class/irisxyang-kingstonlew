@@ -10,7 +10,7 @@ const GRID_SIZE = 16;
 const Post = ({ post, showHeading = false }) => {
   const { user, picture, date, word, likes } = post;
   return (
-    <div className="flex flex-column items-center" style={{ width: "fit-content" }}>
+    <div className="flex flex-column items-center ma3" style={{ width: "fit-content" }}>
       {showHeading && (
         <h1 className="tc">
           {moment(date).format("MM/DD/YYYY")}: {word}

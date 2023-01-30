@@ -10,6 +10,8 @@ import About from "./pages/About.js";
 import Profile from "./pages/Profile.js";
 import Archive from "./pages/Archive.js";
 import Draw from "./pages/Draw.js";
+import Settings from "./pages/Settings";
+import Footer from "./modules/Footer";
 
 import "../utilities.css";
 import "./App.css";
@@ -55,11 +57,13 @@ const App = () => {
           <About path="/about" />
           <Draw path="/draw" />
           <Archive path="/archive" />
-          <Profile path="/profile/:username" user={user} setUser={setUser} />
+          <Profile path="/profile/:username" />
           <DayArchive path="/day/:date" />
+          {user && <Settings path="/settings" user={user} setUser={setUser} />}
           <NotFound default />
         </Router>
       </div>
+      <Footer />
     </GoogleOAuthProvider>
   );
 };

@@ -56,6 +56,13 @@ router.get("/pastDrawings", async (req, res) => {
   res.send({ word, drawings: posts });
 });
 
+router.get("/userPosts", async (req, res) => {
+  const { user } = req.query;
+  const drawings = await Post.find({ user }).populate("user");
+  const posts = await Promise.all(drawings.map(formatPost));
+  res.send(posts);
+});
+
 router.get("/user", async (req, res) => {
   const { username } = req.query;
   const user = await User.findOne({ username });
@@ -86,14 +93,18 @@ router.get("/getPost", auth.ensureLoggedIn, async (req, res) => {
 
 router.post("/editUser", auth.ensureLoggedIn, async (req, res) => {
   const { username, bio } = req.body;
+  console.log(req.body);
   const otherUser = await User.findOne({ username });
   const doesExist = otherUser !== null && otherUser.googleid !== req.session.user.googleid;
-  if (doesExist) return res.status(401).send({ error: "username is taken wahhhhhhhhh :'(" });
-  const user = await User.findByIdAndUpdate(req.session.user._id);
+  if (doesExist) {
+    console.log("user taken :(");
+    return res.status(401).send({ error: "username is taken wahhhhhhhhh :'(" });
+  }
+  const user = await User.findById(req.session.user._id);
   user.username = username;
   user.bio = bio;
   await user.save();
-  // TODO : update req.session.user
+  req.session.user = user;
   res.send({ user });
 });
 

@@ -17,9 +17,9 @@ const Home = ({ user }) => {
   }, []);
 
   return (
-    <div className="flex flex-column">
+    <div className="flex flex-column items-center">
       <h1 className="tc ma4 page-title">* WELCOME TO PIXELTHIS *</h1>
-      <div className="word-container">
+      <div className="word-container w-70">
         <h1 className="tc ma0 fw1 f1">WORD OF THE DAY:</h1>
         <h2 className="tc ma0 mb3 fw1 f1 i">{word}</h2>
         <Link to="/draw" className="link tertiary mv3 f3">
@@ -29,8 +29,8 @@ const Home = ({ user }) => {
           learn about PIXELTHIS {"-->"}
         </Link>
       </div>
-      <h1 className="fw1 f1">TODAY's PIX</h1>
-      <div className="flex flex-row flex-wrap">
+      <h1 className="fw1 f1">TODAY'S PIX</h1>
+      <div className="flex flex-row flex-wrap w-80 justify-center ">
         {posts.map((post) => (
           <Post post={post} />
         ))}

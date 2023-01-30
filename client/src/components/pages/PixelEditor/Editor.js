@@ -58,7 +58,10 @@ const Editor = ({
   };
 
   return (
-    <div className="flex flex-column ma3 items-center editor-border">
+    <div
+      className="flex flex-column ma3 items-center editor-border"
+      style={{ width: "fit-content" }}
+    >
       <div className="flex flex-row justify-between w-100">
         <div className="flex flex-column items-center">
           <div key="toolbar" className="flex flex-row items-center mb3">
@@ -74,7 +77,18 @@ const Editor = ({
             </Tooltip>
           </div>
           <ColorPicker color={color} setColor={(c) => setColor(c)} colors={colors} />
-          <Button variant="contained" onClick={submitDrawing} className="mt3">
+          <Button
+            variant="contained"
+            onClick={submitDrawing}
+            className="mt3"
+            style={{
+              width: "fit-content",
+              textTransform: "none",
+              backgroundColor: "#EB449F",
+              color: "white",
+              fontFamily: '"VT323", "Roboto", sans-serif',
+            }}
+          >
             Save Drawing
           </Button>
         </div>

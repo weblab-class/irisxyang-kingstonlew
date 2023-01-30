@@ -11,3 +11,10 @@
     margin: 0;
 }
 
+.userimage {
+    border: 8px solid var(--secondary);
+}
+
+.bg-stat {
+    background-color: var(--primary);
+}

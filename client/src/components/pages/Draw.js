@@ -20,7 +20,7 @@ const Draw = () => {
   }, []);
 
   return (
-    <div className="flex flex-column">
+    <div className="flex flex-column items-center">
       <h1 className="tc ma4 page-title">
         TODAY'S WORD:{" "}
         <a
