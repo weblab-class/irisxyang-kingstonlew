@@ -25,9 +25,14 @@ const Home = ({ user }) => {
       <div className="word-container w-70">
         <h1 className="tc ma0 fw1 f1">WORD OF THE DAY:</h1>
         <h2 className="tc ma0 mb3 fw1 f1 i">{word}</h2>
-        <Link to="/draw" className="link tertiary mv3 f3">
-          create your own pix {"-->"}
-        </Link>
+        {user ? (
+          <Link to="/draw" className="link tertiary mv3 f3">
+            create your own pix {"-->"}
+          </Link>
+        ) : (
+          <div className="tertiary mv3 f3">log in to begin drawing!</div>
+        )}
+
         <Link to="/about" className="link tertiary mb4 mt1 f3">
           learn about PIXELTHIS {"-->"}
         </Link>

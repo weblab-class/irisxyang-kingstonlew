@@ -55,7 +55,7 @@ const App = () => {
         <Router>
           <Home path="/" user={user} />
           <About path="/about" />
-          <Draw path="/draw" />
+          {user && <Draw path="/draw" />}
           <Archive path="/archive" />
           <Profile path="/profile/:username" user={user} />
           <DayArchive path="/day/:date" user={user} />

@@ -19,9 +19,11 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
           <Link to="/about" className="NavBar-link">
             about
           </Link>
-          <Link to="/draw" className="NavBar-link">
-            draw
-          </Link>
+          {user && (
+            <Link to="/draw" className="NavBar-link">
+              draw
+            </Link>
+          )}
           <Link to="/archive" className="NavBar-link">
             archive
           </Link>

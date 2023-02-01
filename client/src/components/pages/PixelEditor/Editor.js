@@ -76,7 +76,12 @@ const Editor = ({
               </IconButton>
             </Tooltip>
           </div>
-          <ColorPicker color={color} setColor={(c) => setColor(c)} colors={colors} />
+          <ColorPicker
+            color={color}
+            setColor={(c) => setColor(c)}
+            colors={colors}
+            setPen={() => setMode("pen")}
+          />
           <Button
             variant="contained"
             onClick={submitDrawing}
