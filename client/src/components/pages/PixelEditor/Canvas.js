@@ -38,7 +38,7 @@ const Canvas = ({ grid, pixelSize, setGrid, color, addColor, mode }) => {
       onMouseDown={() => setDrawingEnabled(true)}
       onMouseUp={() => setDrawingEnabled(false)}
       onMouseLeave={() => setDrawingEnabled(false)}
-      className="ba bw2 b--blue bg-near-black"
+      className="bg-near-black canvas-border"
       style={{ paddingTop: 1, paddingLeft: 1 }}
     >
       {gridHtml}

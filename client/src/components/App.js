@@ -57,8 +57,8 @@ const App = () => {
           <About path="/about" />
           <Draw path="/draw" />
           <Archive path="/archive" />
-          <Profile path="/profile/:username" />
-          <DayArchive path="/day/:date" />
+          <Profile path="/profile/:username" user={user} />
+          <DayArchive path="/day/:date" user={user} />
           {user && <Settings path="/settings" user={user} setUser={setUser} />}
           <NotFound default />
         </Router>

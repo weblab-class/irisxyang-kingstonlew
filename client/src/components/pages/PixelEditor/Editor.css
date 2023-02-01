@@ -1,3 +1,7 @@
 .editor-border {
     border: 12px solid var(--secondary);
 }
+
+.canvas-border {
+    border-left: 8px solid var(--secondary);
+}

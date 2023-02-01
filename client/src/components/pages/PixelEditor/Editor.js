@@ -63,7 +63,7 @@ const Editor = ({
       style={{ width: "fit-content" }}
     >
       <div className="flex flex-row justify-between w-100">
-        <div className="flex flex-column items-center">
+        <div className="flex flex-column items-center justify-center">
           <div key="toolbar" className="flex flex-row items-center mb3">
             <Select value={mode} onChange={(e) => setMode(e.target.value)}>
               <MenuItem value="pen">Pen</MenuItem>
@@ -81,9 +81,12 @@ const Editor = ({
             variant="contained"
             onClick={submitDrawing}
             className="mt3"
+            size="large"
             style={{
               width: "fit-content",
+              marginTop: "30px",
               textTransform: "none",
+              fontSize: "1.5rem",
               backgroundColor: "#EB449F",
               color: "white",
               fontFamily: '"VT323", "Roboto", sans-serif',

@@ -10,11 +10,14 @@ const Home = ({ user }) => {
 
   React.useEffect(() => {
     get("/api/todaysDrawings").then((res) => {
-      console.log(res);
       setPosts(res);
     });
     get("/api/todaysWord").then((res) => setWord(res.word));
   }, []);
+
+  const updatePosts = (id, post) => {
+    setPosts(posts.map((p) => (p._id === id ? post : p)));
+  };
 
   return (
     <div className="flex flex-column items-center">
@@ -30,9 +33,9 @@ const Home = ({ user }) => {
         </Link>
       </div>
       <h1 className="fw1 f1">TODAY'S PIX</h1>
-      <div className="flex flex-row flex-wrap w-80 justify-center ">
+      <div className="flex flex-row flex-wrap w-80 justify-center">
         {posts.map((post) => (
-          <Post post={post} />
+          <Post setPost={updatePosts} post={post} userSignedIn={user !== undefined} />
         ))}
       </div>
     </div>

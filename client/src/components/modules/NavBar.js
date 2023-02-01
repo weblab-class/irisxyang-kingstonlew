@@ -40,7 +40,7 @@ const NavBar = ({ user, handleLogin, handleLogout }) => {
         )}
         {user ? (
           <div
-            className="NavBar-link"
+            className="NavBar-link pointer"
             onClick={() => {
               googleLogout();
               handleLogout();

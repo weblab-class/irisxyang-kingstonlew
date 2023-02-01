@@ -12,10 +12,11 @@ const moment = require("moment");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Post = require("./models/post");
+const Like = require("./models/like");
 
 // import authentication library
 const auth = require("./auth");
-const { getWord, today, formatPost } = require("./util");
+const { getWord, today, formatPost, getWords } = require("./util");
 
 // api endpoints: all these paths will be prefixed with "/api/"
 const router = express.Router();
@@ -42,24 +43,27 @@ router.get("/todaysWord", (req, res) => {
 });
 
 router.get("/todaysDrawings", async (req, res) => {
+  const userId = req.session.user ? req.session.user._id : undefined;
   const date = today();
   const drawings = await Post.find({ date }).populate("user");
-  const posts = await Promise.all(drawings.map(formatPost));
+  const posts = await Promise.all(drawings.map((p) => formatPost(p, userId)));
   res.send(posts);
 });
 
 router.get("/pastDrawings", async (req, res) => {
+  const userId = req.session.user ? req.session.user._id : undefined;
   const { date } = req.query;
   const word = getWord(date);
   const drawings = await Post.find({ date }).populate("user");
-  const posts = await Promise.all(drawings.map(formatPost));
+  const posts = await Promise.all(drawings.map((p) => formatPost(p, userId)));
   res.send({ word, drawings: posts });
 });
 
 router.get("/userPosts", async (req, res) => {
+  const userId = req.session.user ? req.session.user._id : undefined;
   const { user } = req.query;
   const drawings = await Post.find({ user }).populate("user");
-  const posts = await Promise.all(drawings.map(formatPost));
+  const posts = await Promise.all(drawings.map((p) => formatPost(p, userId)));
   res.send(posts);
 });
 
@@ -82,6 +86,32 @@ router.post("/post", auth.ensureLoggedIn, async (req, res) => {
   res.send({ post });
 });
 
+router.get("/tempy", (req, res) => {
+  Like.find().then((likes) => res.send({ likes }));
+});
+
+router.get("/archive", async (req, res) => {
+  res.send(getWords(today()));
+});
+
+router.post("/like", auth.ensureLoggedIn, async (req, res) => {
+  const userId = req.session.user._id;
+  const { postId } = req.body;
+  const existingLike = await Like.findOne({ userId, postId });
+  const hasLiked = existingLike !== null;
+  if (hasLiked) return res.send({ msg: "already liked" });
+  const like = new Like({ userId, postId });
+  await like.save();
+  res.send({ msg: "success" });
+});
+
+router.post("/unlike", async (req, res) => {
+  const userId = req.session.user._id;
+  const { postId } = req.body;
+  await Like.findOneAndDelete({ userId, postId });
+  res.send({ msg: "success" });
+});
+
 /**
  * For fetching a post for today's canvas
  */
@@ -93,11 +123,9 @@ router.get("/getPost", auth.ensureLoggedIn, async (req, res) => {
 
 router.post("/editUser", auth.ensureLoggedIn, async (req, res) => {
   const { username, bio } = req.body;
-  console.log(req.body);
   const otherUser = await User.findOne({ username });
   const doesExist = otherUser !== null && otherUser.googleid !== req.session.user.googleid;
   if (doesExist) {
-    console.log("user taken :(");
     return res.status(401).send({ error: "username is taken wahhhhhhhhh :'(" });
   }
   const user = await User.findById(req.session.user._id);
